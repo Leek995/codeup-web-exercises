@@ -8,16 +8,23 @@ alert("No way that is my favorite color too! " + "I wear " + favorite_color + " 
 
 alert("You've order 3 movies. Little Mermaid, Brother Bear, Herculus.");
 
-var price_of_movie = 3;
 var days_rented = 0;
-var movie_amount = 3;
+var movie_1;
+var movie_2;
+var movie_3;
 
-var movie_1 = prompt("How many days do you want to rent Little Mermaid?");
-days_rented = movie_1 + days_rented;
+days_rented = prompt("How many days do you want to rent Little Mermaid?");
+movie_1 = days_rented * 3;
 
-var movie_1 = prompt("How many days do you want to rent Brother Bear?");
-days_rented = movie_1 + days_rented;
+days_rented = prompt("How many days do you want to rent Brother Bear?");
+movie_2 = days_rented * 3;
 
-var movie_1 = pr
+days_rented = prompt("How many days do you want to rent Herculus?");
+movie_3 = days_rented * 3;
+
+var movie_amount = 0;
+movie_amount = movie_1 + movie_2 + movie_3;
+
+confirm("Your purchase amount is $" + movie_amount + ".");
 
 
