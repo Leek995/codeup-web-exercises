@@ -283,6 +283,6 @@ if(isTrue){
     if(plus_some > 0){
         alert(`That's a positive number ${plus_some}`);
     }
-}
+};
 
 

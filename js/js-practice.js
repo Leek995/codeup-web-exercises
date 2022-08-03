@@ -12,8 +12,7 @@ function increment (someNumber) {
     return someNumber + 2;
 }
 */
-
-var increment = function(x) {
+var increment = function(x){
     return x + 1;
 };
 
