@@ -18,3 +18,5 @@ var increment = function(x){
 
 var two = increment(1);
 console.log(var two = increment(1);
+
+var building_house = ['concrete', 'cables', 'sheetrock', 'grass', 'wood', 'nails', 'hammer']
