@@ -43,4 +43,5 @@
     circle.logInfo(true);
     console.log(`The area of the circle is ${circle.getArea()}`);
     console.log(`This is the area rounded ${circle.logInfo(circle.getArea())}`);
+
 })();
