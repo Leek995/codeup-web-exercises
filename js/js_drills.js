@@ -1,11 +1,11 @@
-(function(){
+(function() {
     'use strict'
     // Function Drills
     // Functions using conditionals but not loops or arrays:
 
     // Make a function named isOdd(number)
-    function isOdd(number){
-        if(number % 2 !== 0) return number;
+    function isOdd(number) {
+        if (number % 2 !== 0) return number;
     }
 
     // Make a function named isEven(number)
@@ -14,66 +14,96 @@
     }
 
     // Make a function named identity(input) that returns the input exactly as provided.
-    function identity(input){
+    function identity(input) {
         return console.log(`Input: ${input}`)
     }
 
     // Make a function named isFive(input)
-    function isFive(input){
-        if(input === 5) return console.log(`Yup that's ${5}!`);
+    function isFive(input) {
+        if (input === 5) return console.log(`Yup that's ${5}!`);
         else return console.log(`Not quite 5`);
     }
+
     // Make a function named addFive(input) that adds five to some input.
-    function addFive(input){
-        if(isNaN(input)) return console.log("Not going to be able to add 5.");
+    function addFive(input) {
+        if (isNaN(input)) return console.log("Not going to be able to add 5.");
         console.log(input + 5);
     }
 
     // Make a function named isMultipleOfFive(input)
-    function isMultipleOfFive(input){
-        if(input % 5 === 0){
+    function isMultipleOfFive(input) {
+        if (input % 5 === 0) {
             return console.log(`${input} is a multiple of 5`);
-        }else{
+        } else {
             return console.log(`${input} is NOT a multiple of 5`);
         }
     }
+
     // Make a function named isThree(input)
-    function isTree(input){
-        if(input === 3) return console.log(`Yup that is 3!`);
+    function isTree(input) {
+        if (input === 3) return console.log(`Yup that is 3!`);
     }
 
     // Make a function named isMultipleOfThree(input)
-    function isMultipleOfThree(input){
-        if(input % 3 === 0){
+    function isMultipleOfThree(input) {
+        if (input % 3 === 0) {
             console.log(`${input}, is a multiple of 3!`);
-        }else {
+        } else {
             console.log(`Try again.`);
         }
     }
 
     // Make a function named isMultipleOfThreeAndFive(input)
-    function isMultipleOfThreeAndFive(input){
-        if(input % 3 === 0 && input % 5 === 0){
+    function isMultipleOfThreeAndFive(input) {
+        if (input % 3 === 0 && input % 5 === 0) {
             return console.log(`${input} is a multiple of both 3 & 5.`);
-        }else{
+        } else {
             return console.log("Try again");
         }
     }
 
     // Make a function named isMultipleOf(target, n) which checks if target is evenly divisible by n
 
-    function isMultipleOf(target, n){
-        if(target % n === 0){
+    function isMultipleOf(target, n) {
+        if (target % n === 0) {
             return console.log(`${n} is a multiple of ${target}!`);
-        }else if(target % n !== 0){
+        } else if (target % n !== 0) {
             return console.log(`Try again. ${n} is NOT a multiple of ${target}`)
-        }else{
+        } else{
             return false;
         }
     }
+
+
+
     // Make a function named isTrue(boolean)
+    function isTrue(boolean){
+        if(boolean === 'true'){
+            return console.log('true');
+        }else if(boolean === 'false'){
+            return console.log('false');
+        }
+    }
+    isTrue('true');
+
     // Make a function named isFalse(boolean)
+    function isFalse(boolean){
+        if(boolean === true ){
+            return console.log(false);
+        }else if(boolean !==  false){
+            return console.log(true);
+        }
+    }
     // Make a function named isTruthy(input), remember that values other than true will behave like true
+    function isTruthy(input){
+        if(input === input){
+            return console.log(true);
+        }else if(typeof input === null){
+            return console.log(true)
+        }
+    }
+
+
     // Make a function named isFalsy(input), remember that values other than false behave like false
     // Make a function named isVowel(letter)
     // Make a function named isConsonant(letter)
@@ -123,3 +153,5 @@
 // !!""
 // !(true || false)
 // !(false && true)
+
+})();
