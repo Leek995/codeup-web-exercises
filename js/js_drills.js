@@ -87,22 +87,31 @@
     isTrue('true');
 
     // Make a function named isFalse(boolean)
-    function isFalse(boolean){
-        if(boolean === true ){
-            return console.log(false);
-        }else if(boolean !==  false){
-            return console.log(true);
-        }
-    }
-    // Make a function named isTruthy(input), remember that values other than true will behave like true
-    function isTruthy(input){
-        if(input === input){
-            return console.log(true);
-        }else if(typeof input === null){
-            return console.log(true)
-        }
-    }
+    // function isFalse(boolean){
+    //     if(boolean === true ){
+    //         return console.log(false);
+    //     }else if(boolean !==  false){
+    //         return console.log(true);
+    //     }
+    // }
+    // // Make a function named isTruthy(input), remember that values other than true will behave like true
+    // function isTruthy(input){
+    //     if(input === input){
+    //         return console.log(true);
+    //     }else if(typeof input === null){
+    //         return console.log(true)
+    //     }
+    // }
 
+    var printNumTwo;
+    for (var i = 0; i < 3; i++) {
+        if (i === 2) {
+            printNumTwo = function() {
+                return i;
+            };
+        }
+    }
+    console.log(printNumTwo());
 
     // Make a function named isFalsy(input), remember that values other than false behave like false
     // Make a function named isVowel(letter)
