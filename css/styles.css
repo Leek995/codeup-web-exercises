@@ -4,7 +4,26 @@ line
 comment
 */
 
-.fancy-header {
+h1{
+    text-align: center;
     color: darkred; /* single line comment */
     text-decoration: underline;
+}
+
+.main-headers{
+    color: darkred;
+    text-decoration: darkred;
+}
+
+body{
+    background-color: floralwhite;
+    background-image: url("../img/pexels-pixabay-270549.jpg") ;
+    background-size: contain;
+    color: ghostwhite;
+    overflow: scroll;
+    resize: both;
+}
+
+li{
+    content: "v";
 }
