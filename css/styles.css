@@ -22,8 +22,21 @@ body{
     color: ghostwhite;
     overflow: scroll;
     resize: both;
+    font-family: Verdana;
 }
 
 li{
-    content: "v";
+    list-style-type: none;
+}
+
+td, tr{
+    padding: 4px ;
+    font-family: fantasy;
+}
+
+a:hover {
+    color: blue;
+}
+a:visited {
+    color: black;
 }
