@@ -1,0 +1,214 @@
+body{
+    background-color: lightskyblue;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+}
+h1{
+    text-align: center;
+}
+h2, h3{
+    text-align: left;
+}
+.card{
+    background-color: #FFFFFF;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+
+}
+.section{
+    display: flex;
+    flex-direction: row;
+
+}
+.green-back-ground{
+    background-color: lightgreen;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.green-box {
+    background-color: darkgreen;
+    border: 2px solid black;
+    width: 40px;
+    height: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#last-green-box{
+    align-self: start;
+}
+.purple-box{
+    background-color: purple;
+    border: 2px solid black;
+    width: 40px;
+    height: 15px;
+
+}
+#box1{
+    flex-grow: 1;
+}
+#box2{
+    flex-grow: 1;
+}
+
+.purple-back-ground{
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 25px;
+    width: 100%;
+
+}
+.blue-box{
+    background-color: blue;
+    border: 2px solid black;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px ;
+    height: 150px;
+}
+.head-circles{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.orange-circle{
+    height: 40px;
+    width: 40px;
+    background-color: orange;
+    border-radius: 50%;
+}
+.brown-box_background{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    justify-content: space-between;
+
+}
+.large-brown-box{
+    background-color: brown;
+    border: 2px solid black;
+    width: 200px;
+    height: 150px;
+
+}
+.yellow-background {
+    flex-direction: row;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 25px;
+    justify-content: space-around;
+
+}
+.yellow-box{
+    background-color: yellow;
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+}
+
+.orange-background{
+    background-color: orange;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 400px;
+
+}
+.grey-box {
+    background-color: grey;
+    border: 1px solid black;
+    width: 90px;
+    height: 90px;
+    margin-top: 20px;
+
+}
+.grey-box-odd {
+    width: 45px;
+    height: 60px;
+    border: 1px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*main.container{*/
+/*    background-color: #FFFFFF;*/
+/*    width:50%;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*article.card{*/
+/*    flex-direction: column;*/
+/*    justify-content: space-around;*/
+/*    align-items: stretch;*/
+/*    width: 100%;*/
+/*    padding: 25px;*/
+/*    background-color: white;*/
+/*}*/
+/*.green-back-ground{*/
+/*    background-color: lightgreen;*/
+/*    width: 100%;*/
+/*    height: 60px;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
+/*.green-box{*/
+/*    background-color: darkgreen;*/
+/*    border: 2px solid black;*/
+/*    width: 40px;*/
+/*    height: 15px;*/
+/*}*/
+/*#last-green-box{*/
+/*    align-self: start;*/
+/*}*/
+/*.purple-box-background{*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*    height: 15px;*/
+/*    flex-direction: row;*/
+/*}*/
+/*#box1{*/
+/*    color: purple;*/
+/*    width: 100%;*/
+/*    height: 15%;*/
+/*}*/
+
