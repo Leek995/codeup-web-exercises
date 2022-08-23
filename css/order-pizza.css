@@ -1,0 +1,76 @@
+.btn{
+    width: 300px;
+}
+.form-control{
+    width: 250px;
+}
+.bg-img-container{
+    width: 100%;
+    padding-top: 135px;
+}
+.welcome-line{
+    background-color: rgba(255,255,255,0.5);
+    width: 100%;
+    text-align: center;
+    color: dimgrey;
+}
+.contana{
+    background-image: url("../img/pizza.png");
+    background-repeat: no-repeat;
+    height: 346px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.order-pizza-form{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section{
+    /*border: 1px solid lightgrey;*/
+    /*border-radius: 6px;*/
+    margin-bottom: 50px;
+    margin-top: 0px;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    border-radius: 6px;
+    padding-bottom: 15px;
+}
+
+.title{
+    display: flex;
+    align-items:center;
+    background-color: #1e5eff;
+    color: white;
+    height: 50px;
+    margin-top: 20px;
+    padding-left: 10px;
+    border-radius: 6px;
+}
+
+.align-circle{
+    margin-left: 15px;
+}
+
+.list-group{
+    height: 50px;
+    margin-bottom: 100px;
+    width: 100%;
+}
+.card{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-header{
+    padding: 0px;
+}
+
+.btn-primary{
+    float: right;
+}
