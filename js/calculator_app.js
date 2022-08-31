@@ -18,7 +18,16 @@
         }
         console.log(`Button ${i} value is ${buttons[i].getAttribute("value")}`);
     }
-
+    var input_box_1 = document.getElementById("input-box-1");
+    var input_box_2 = document.getElementById("input-box-2");
+    var operator_box = document.getElementById("operator");
+    input_box_1.setAttribute("value", 0 );
+    input_box_2.setAttribute("value", 0);
+    for (let i = 0; i < buttons.length; ++i){
+        buttons[i].addEventListener("click", () => {
+            input_box_1.setAttribute("value", buttons[i].getAttribute("value"));
+        })
+    }
 
     // var buttons = document.getElementsByTagName("button");
     // for(var i = 0; i < buttons.length; i++) {
@@ -26,21 +35,21 @@
     //         buttons.setAttribute("value", "1");
     //         console.log(buttons[4]);
     //     }
-    //
-    //     buttons.forEach(function(button){
-    //         if(button === buttons[4]){
-    //             button.setAttribute("value", "=");
-    //         }
-    //         console.log(button[4]);
-    //     });
-    //     var btn1 = document.getElementById("btn1");
-    //     btn1.setAttribute("value", 1);
-    //     var input_box_1 = document.getElementById("input-box-1");
-    //     input_box_1.setAttribute("value", 0);
-    //     var first_input = function (event){
-    //         input_box_1["value"] = btn1["value"];
-    //     }
-    //     btn1.addEventListener("click",first_input );
-    //     console.log(input_box_1[btn1]);
+
+        // buttons.forEach(function(button){
+        //     if(button === buttons[4]){
+        //         button.setAttribute("value", "=");
+        //     }
+        //     console.log(button[4]);
+        // });
+        var btn1 = document.getElementById("btn1");
+        btn1.setAttribute("value", 1);
+        var input_box_1 = document.getElementById("input-box-1");
+        input_box_1.setAttribute("value", 0);
+        var first_input = function (event){
+            input_box_1["value"] = btn1["value"];
+        }
+        btn1.addEventListener("click",first_input );
+        console.log(input_box_1[btn1]);
 
 })();
