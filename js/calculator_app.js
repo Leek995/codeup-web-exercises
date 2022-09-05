@@ -1,55 +1,43 @@
 (function(){
     "use strict"
-    var buttons = document.getElementsByTagName("button");
-    console.log(buttons);
-    for(var i = 0; i < buttons.length; i++){
-        buttons[i].setAttribute("value", i);
-        console.log(`Button ${i} value is ${buttons[i].getAttribute("value")}`);
-        if(buttons[i] === buttons[4]){
-            buttons[i].setAttribute("value", "+");
-        }else if(buttons[i] === buttons[8]){
-            buttons[i].setAttribute("value", "-" )
-        }else if(buttons[i] === buttons[12]){
-            buttons[i].setAttribute("value","*" )
-        }else if(buttons[i] === buttons[15]){
-            buttons[i].setAttribute("value","=" )
-        }else if(buttons[i] === buttons[16]){
-            buttons[i].setAttribute("value","/" )
+    // Gather all the button elements from HTML store location of each node in variable
+    var buttons = document.querySelectorAll("button");
+
+    // Functions that sorts integer buttons from other buttons
+    function numberButtons(buttons){
+        // create an empty array to sort all the buttons with that represent an integer
+        let number_buttons = [];
+        // iterate through array of buttons; that has an attribute of id
+        // during iteration store node in empty array of number_buttons
+        buttons.forEach(function (button){
+            if(button.hasAttribute('id')){
+                number_buttons.push(button);
+            }
+        })
+        // iterate through array; and create Attribute of value based on id number
+        for(let i = 0; i < number_buttons.length; ++i){
+            if(number_buttons[i]['id'] === i){
+                number_buttons[i].createAttribute('value');
+                number_buttons[i].setAttribute('value', i)
+            }
         }
-        console.log(`Button ${i} value is ${buttons[i].getAttribute("value")}`);
+        console.log(number_buttons);
+        for(let i = 0; i < number_buttons.length; ++i){
+            if(number_buttons[i]["id"] === number_buttons[i]){
+                number_buttons.splice(number_buttons[i], 1, number_buttons[i]["value"]);
+            }
+        }
+        console.log(number_buttons);
+        // Return array with integers associated with corresponding values
+        return number_buttons;
     }
-    var input_box_1 = document.getElementById("input-box-1");
-    var input_box_2 = document.getElementById("input-box-2");
-    var operator_box = document.getElementById("operator");
-    input_box_1.setAttribute("value", 0 );
-    input_box_2.setAttribute("value", 0);
-    for (let i = 0; i < buttons.length; ++i){
-        buttons[i].addEventListener("click", () => {
-            input_box_1.setAttribute("value", buttons[i].getAttribute("value"));
+    let input_box = document.querySelector('input');
+    function event() {
+
+    }
+    function numbBtnListeners(buttons){
+        buttons.forEach(function (button){
+            button.addEventListener("click", )
         })
     }
-
-    // var buttons = document.getElementsByTagName("button");
-    // for(var i = 0; i < buttons.length; i++) {
-    //     if (buttons[i] === buttons[4]) {
-    //         buttons.setAttribute("value", "1");
-    //         console.log(buttons[4]);
-    //     }
-
-        // buttons.forEach(function(button){
-        //     if(button === buttons[4]){
-        //         button.setAttribute("value", "=");
-        //     }
-        //     console.log(button[4]);
-        // });
-        var btn1 = document.getElementById("btn1");
-        btn1.setAttribute("value", 1);
-        var input_box_1 = document.getElementById("input-box-1");
-        input_box_1.setAttribute("value", 0);
-        var first_input = function (event){
-            input_box_1["value"] = btn1["value"];
-        }
-        btn1.addEventListener("click",first_input );
-        console.log(input_box_1[btn1]);
-
 })();
