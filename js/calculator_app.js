@@ -1,8 +1,11 @@
 (function(){
     "use strict"
-    // Gather all the button elements from HTML store location of each node in variable
-    var buttons = document.querySelectorAll("button");
-
+    // Functions that displays how html is render on document
+    function inputBox(button){
+        var html = '';
+        html += `<h1>${button.value}</h1>`
+        return html;
+    }
     // Functions that sorts integer buttons from other buttons
     function numberButtons(buttons){
         // create an empty array to sort all the buttons with that represent an integer
@@ -21,23 +24,29 @@
                 number_buttons[i].setAttribute('value', i)
             }
         }
-        console.log(number_buttons);
+
         for(let i = 0; i < number_buttons.length; ++i){
             if(number_buttons[i]["id"] === number_buttons[i]){
                 number_buttons.splice(number_buttons[i], 1, number_buttons[i]["value"]);
             }
         }
-        console.log(number_buttons);
+
         // Return array with integers associated with corresponding values
         return number_buttons;
     }
-    let input_box = document.querySelector('input');
-    function event() {
 
-    }
-    function numbBtnListeners(buttons){
-        buttons.forEach(function (button){
-            button.addEventListener("click", )
+    for(let i = 0; i < buttons.length; ++i){
+        buttons[i].addEventListener("click", () => {
+            var results;
+            results = buttons[i]['id'];
+            var getResults = inputBox(results);
         })
+        input_container.innerHTML = getResults;
     }
+
+    // Gather all the button elements from HTML store location of each node in variable
+    var buttons = document.querySelectorAll("button");
+    var input_container = document.querySelector('input-container');
+
 })();
+

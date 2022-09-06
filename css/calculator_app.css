@@ -6,6 +6,9 @@
         float: right;
         display: inline;
     }
+    input{
+        border: none;
+    }
 }
 
 /**********************     SMALL (SM) screen sizes following bootstrap breakpoints            ************************/
