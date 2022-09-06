@@ -56,4 +56,7 @@
         $('li').css('color', 'black');
     }
     $('li').hover(hoveringIn, hoveringOut);
+
+    var subSubContent = document.getElementById('#sub-sub-content').innerHTML;
+    subSubContent =
 })();
