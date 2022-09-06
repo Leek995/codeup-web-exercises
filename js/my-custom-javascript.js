@@ -19,4 +19,20 @@
         alert(content.html());
     });
 
+    var subContent = $('#sub-content');
+    console.log(subContent.html());
+    var hover_out = function (e){
+        subContent.css('background', 'none');
+    }
+    var hover_in = function (e){
+        subContent.css('background', 'yellow');
+    }
+    $('#sub-content').hover( hover_in, hover_out );
+
+    subContent.mouseenter(function (){
+        subContent.css('font-size', '50px');
+    })
+    subContent.mouseout(function (){
+        subContent.css('font-size', '10px');
+    })
 })();
