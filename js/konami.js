@@ -10,9 +10,10 @@
         39: "right",
         40: "down",
         65: "a",
-        66: "b"
+        66: "b",
+        13: "enter"
     }
-     let konami_code = ["up", "up", "down", "down", "left", "right", "left", "right", "a", "b"]
+     let konami_code = ["up", "up", "down", "down", "left", "right", "left", "right", "a", "b", "enter"]
 
 
 
