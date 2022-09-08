@@ -3,18 +3,18 @@
     "use strict"
     // get defition data to later add class to element
     // returns a list of definition data object array
-    let definition_data = $('dd');
-    let definition_title = $('dt');
+    // let definition_data = $('dd');
+    // let definition_title = $('dt');
 
     // add class of invisible
-    definition_data.addClass('invisible');
+    // definition_data.addClass('invisible');
 
     // create an event that turns definition data visible when(clicked)
     // remove class functions to toggle off. Maybe refactor to use toggle
     // method.
 
-    definition_data.removeClass('invisible');
-    definition_data.addClass('visible');
+    // definition_data.removeClass('invisible');
+    // definition_data.addClass('visible');
 
     // for(let i =0; i < definition_title.length; ++i){
     //     definition_title[i].hover(
@@ -27,7 +27,7 @@
     //             definition_data[i].addClass('invisible');
     //         })
     // }
-    console.log(definition_data[2].)
+    // console.log(definition_data[2].)
 
     // definition_title.hover(
     //     function (e){
@@ -55,7 +55,7 @@
     //         })
     //     }
 
-
+  console.log($('ul').children().next())
 
 
 
