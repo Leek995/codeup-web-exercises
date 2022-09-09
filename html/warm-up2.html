@@ -18,18 +18,39 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
-"
+
 <script>
     "use strict";
 
-    // TODO: the text of the h1 should change to "Hello Haskell" when a user hovers over the #hover-box div. When not hovering over the #hover-box div, the text should read "Hello World"
-    $('#hover-box').hover( e => {
-        $('h1').html("Hello Haskell");
-    },
-        e => {
-        $('h1').html("Hello world");
+    // // TODO: the text of the h1 should change to "Hello Haskell" when a user hovers over the #hover-box div. When not hovering over the #hover-box div, the text should read "Hello World"
+    // $('#hover-box').hover( e => {
+    //     $('h1').html("Hello Haskell");
+    // },
+    //     e => {
+    //     $('h1').html("Hello world");
+    //     }
+    // )
+    var cars = [
+        {
+            make: "Toyota",
+            model: "Camry",
+            features: ["Automatic Windows", "Bluetooth Connectivity", "GPS Navigation"],
+            owner: {
+                name: "Jane Doe",
+                age: 30
+            }
+        },
+        {
+            make: "Honda",
+            model: "Accord",
+            features: ["Automatic Windows", "Great Gas Mileage", "AM/FM Radio"],
+            owner: {
+                name: "John Doe",
+                age: 31
+            }
         }
-    )
+    ];
+    console.log(cars[0]["features"][0]);
 
 </script>
 </body>
