@@ -30,6 +30,7 @@
     "tool"
   ],
   "price": 10
+<<<<<<< HEAD
 }, {
     "title": "Shovel",
     "quantity": 120,
@@ -38,4 +39,7 @@
     ],
     "price": 23
   }
+=======
+}
+>>>>>>> eef4db8b151db5695951dbd7ab30b4138389b10f
 ]
