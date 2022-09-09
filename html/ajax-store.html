@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax Store</title>
+    <style>
+        *{
+            font-family: monospace;
+        }
+        h1{
+            text-align: center;
+        }
+        article{
+            margin-left: auto;
+            margin-right: auto;
+            width: 25%;
+            border-bottom: 3px dotted black;
+        }
+    </style>
+</head>
+<body>
+<h1>Hardware Plus++</h1>
+<div id="inventory">
+    <article>
+        <dl>
+            <dt>Item</dt>
+            <dd>Name</dd>
+            <dt>Quantity</dt>
+            <dd>#</dd>
+            <dt>Categories</dt>
+            <dd>type</dd>
+            <dd>type</dd>
+        </dl>
+    </article>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        "use strict"
+        // TODO
+        // 1. make a request for the data (inventory.json)
+        // 2. loop through the data and build an HTML string to create the HTML to
+        // display them data
+        // 3. update the DOM with the new HTML
+
+        function renderHTML(inventory){
+            let html = '';
+            for(let i = 0; i < inventory.length; ++i){
+                html += '   <div id="inventory">\n' +
+                    '       <article>\n' +
+                    '           <dl>\n' +
+                    '               <dt>Item</dt>\n' +
+                    '               <dd> ' + inventory[i].title + ' </dd>\n' +
+                    '               <dt>Quantity</dt>\n' +
+                    '               <dd> ' + inventory[i].quantity + ' </dd>\n' +
+                    '               <dt>Categories</dt>\n' +
+                    '               <dd id="more"> ' + inventory[i]['categories'] + ' </dd>\n' +
+                    '               <dt>Price</dt>\n' +
+                    '               <dd> ' + inventory[i].price + ' </dd>\n' +
+                    '           </dl>\n' +
+                    '       </article>\n' +
+                    '   </div>';
+
+
+            }
+            return html;
+        }
+
+            // [
+            //     {
+            //         "title": "Hammer",
+            //         "quantity": 25,
+            //         "categories": [
+            //             "tool"
+            //         ],
+            //         "price": 20
+            //     },
+        function totalPrice(inventory){
+            inventory.forEach(function (item){
+                let totalP =+  item.price;
+            })
+        }
+
+        function loadDataPage(){
+            // make request to inventory.json
+            $.get('../data/inventory.json')
+                .done(function(inventory){
+                    // Printing inventory object on console
+                    console.log(inventory);
+                    console.log(inventory[1]['categories'])
+                    // creating html string
+                    let inventoryHTML = renderHTML(inventory);
+                    // update the DOM with new HTML
+                    $('#inventory').html(inventoryHTML);
+                })
+                .fail(function(jqXhr, status, error){
+                    console.log(jqXhr);
+                    console.log(status);
+                    console.log(error);
+                })
+        }
+        loadDataPage();
+    })
+
+</script>
+</body>
+</html>
