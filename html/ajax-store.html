@@ -104,10 +104,8 @@
                     '       </article>\n' +
                     '   </div>';
 
-<<<<<<< HEAD
-=======
 
->>>>>>> eef4db8b151db5695951dbd7ab30b4138389b10f
+
             }
             return html;
         }
@@ -121,10 +119,10 @@
             //         ],
             //         "price": 20
             //     },
-<<<<<<< HEAD
 
-=======
->>>>>>> eef4db8b151db5695951dbd7ab30b4138389b10f
+
+
+
         function totalPrice(inventory){
             inventory.forEach(function (item){
                 let totalP =+  item.price;
@@ -136,8 +134,6 @@
             $.get('../data/inventory.json')
                 .done(function(inventory){
                     // Printing inventory object on console
-                    console.log(inventory);
-                    console.log(inventory[1]['categories'])
                     // creating html string
                     let inventoryHTML = renderHTML(inventory);
                     // update the DOM with new HTML
@@ -148,12 +144,12 @@
                     console.log(status);
                     console.log(error);
                 })
-<<<<<<< HEAD
+
             $('button').on('click', e =>{
                 loadDataPage();
             })
-=======
->>>>>>> eef4db8b151db5695951dbd7ab30b4138389b10f
+
+
         }
         loadDataPage();
     })
