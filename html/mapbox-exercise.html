@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <title>Mapbox</title>
+</head>
+<body>
+<div id='map' style='width: 400px; height: 300px;'></div>
+<script src="../js/keys.js"></script>
+<script>
+
+    mapboxgl.accessToken = MAPBOX_TOKEN_EX1;
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/malikwillis17/cl7zlxr0r004e15mk5sy603mk',
+        zoom: 5,
+        center: [-95.397900, 29.761600],
+    });
+    setTimeout(function (){
+        map.setCenter([-95.397900, 29.761600]);
+        map.setZoom(3);
+        map.setStyle('mapbox://styles/mapbox/satellite-v9');
+    }, 5000);
+
+
+</script>
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+</body>
+</html>
