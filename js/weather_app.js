@@ -5,6 +5,18 @@
 (function (){
     "use strict"
     console.log('testing conection');
+    // 1.) create a function to render html to page from five day forecast function
+    // TODO
+    // create structure of data in a table format on HTML file and in function
+    // loop through format to display forecast for each day
+    function renderHTML(weatherData){
+        let html = '';
+        html += '<div id="five-day-forecast">\n' +
+            '   <h1>Time</h1>\n' +
+            '   <p>' + weatherData[0][0]['dt'] + '</p>/n' +
+            '</div>\n';
+        return html;
+    }
     // 1.) Update your layout and AJAX request(s) to display a five day forecast for the city you
     //      live in that looks like the screenshot below.
     //TODO
@@ -35,10 +47,13 @@
                 //counter for while loop to eventually terminate
                 forecast.length - 8;
             }else {
+                // Break if forecast length is not divisible by 8
                 break;
             }
+
         }
         console.log(five_day_forecast);
+        return five_day_forecast;
     }
 
     $.get('https://api.openweathermap.org/data/2.5/forecast',{
@@ -48,7 +63,10 @@
         unit: 'imperial',
     }).done(function (data){
         console.log(data);
-        fiveDayForeCast(data);
+        // fiveDayForeCast(data);
+        let weatherData = fiveDayForeCast(data);
+        let fiveDayForeCastHTML = renderHTML(weatherData);
+        $('#five-day-forecast').html(fiveDayForeCastHTML);
     }).fail(function (error){
         console.log(error);
     })
