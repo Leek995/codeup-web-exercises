@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather API Examples</title>
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="../js/keys.js"></script>
+
+<script>
+    "use strict";
+
+    $.get('https://api.openweathermap.org/data/2.5/forecast', {
+        appid: WEATHER_APP_ID,
+        lat: 29.4252,
+        lon: -98.4916,
+        units: 'imperial',
+    }).done(function(data) {
+        console.log(data);
+        console.log(data['city']['name'])
+        console.log(data['list'][0]['main']['feels_like']); //list 0 is for the next 3 hours
+        console.log(data['list'][0]['clouds']['all']);
+        console.log(data['message']);
+        console.log(data['list'][0]['sys']['pod']);
+        console.log(data['list'][3]['wind']['speed']);
+        console.log(data['list'][1]['weather'][0]['description']);
+        console.log(data['list'][0]['dt']);
+        console.log(data['list'][6]['dt_txt']);
+        console.log(data['city']['coord']['lat']);
+        console.log(data['list'][0]['main']['temp'])
+
+        // console.log(days);
+
+        // dealing with time
+        // convert API date/time response to JS Date Object
+        // ... new Date(1629461117 * 1000)
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+    }).fail(function(error) {
+        console.log(error);
+
+    });
+
+</script>
+
+</body>
+</html>
