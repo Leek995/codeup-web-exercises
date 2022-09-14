@@ -11,10 +11,12 @@
     // loop through format to display forecast for each day
     function renderHTML(weatherData){
         let html = '';
-        html += '<div id="five-day-forecast">\n' +
-            '   <h1>Time</h1>\n' +
-            '   <p>' + weatherData[0][0]['dt'] + '</p>/n' +
-            '</div>\n';
+        html += `<div id="five-day-forecast">\n` +
+            `   <h1>Time</h1>\n` +
+            `   <p>${weatherData[0][0]['dt']}</p>/n` +
+            `</div>\n`;
+
+
         return html;
     }
     // 1.) Update your layout and AJAX request(s) to display a five day forecast for the city you
@@ -55,6 +57,7 @@
         console.log(five_day_forecast);
         return five_day_forecast;
     }
+
 
     $.get('https://api.openweathermap.org/data/2.5/forecast',{
         appid: WEATHER_APP_ID,

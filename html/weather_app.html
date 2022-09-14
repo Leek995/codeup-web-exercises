@@ -11,17 +11,120 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!--                                             STYLESHEET                                                      -->
     <link rel="stylesheet" href="../css/weather_app.css" >
+    <!--                                             MAPBOX CDN                                                      -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+
     <title>Weather Map</title>
 </head>
 <body>
+<style>
+    .coordinates {
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        position: absolute;
+        bottom: 40px;
+        left: 10px;
+        padding: 5px 10px;
+        margin: 0;
+        font-size: 11px;
+        line-height: 18px;
+        border-radius: 3px;
+        display: none;
+    }
+</style>
 <h1>Weather APP</h1>
 <div id="five-day-forecast"></div>
+<div id='map' style='width: 400px; height: 300px;'></div>
+<pre id="coordinates" class="coordinates"></pre>
+
+<form id="addy" type="post">
+    <label for="address-input1">Street Name</label>
+    <input required="required" type="text" id="address-input1" name="street-name" value="1234 ABCD ln" placeholder="Street Name"><br><br>
+    <label for="address-input2">City</label>
+    <input required="required" type="text" id="address-input2" name="city" value="Dallas" placeholder="City"><br><br>
+    <label for="address-input3">State</label>
+    <input required="required" type="text" id="address-input3" name="state" value="Texas" placeholder="State"><br><br>
+    <label for="address-input4">Zipcode</label>
+    <input required="required" type="text" id="address-input4" name="zipcode" value="12345" placeholder="Zipcode"><br><br>
+    <button id="btn">Search</button>
+</form>
 <!--                                                 jQUERY CDN                                                      -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
+
 <!--                                                 $API Key$                                                       -->
 <script src="../js/keys.js"></script>
+<script src="../js/mapbox-geocoder-utils.js"></script>
+<script type="text/javascript">
+    var jsonData = {};
+    $(document).ready(function() {
+        $("#btn").click(function(e){
+            var formData = $("#addy").serializeArray();
+            // console.log(formData);
+
+            $.each(formData, function() {
+                if (jsonData[this.name]) {
+                    if (!jsonData[this.name].push) {
+                        jsonData[this.name] = [jsonData[this.name]];
+                    }
+                    jsonData[this.name].push(this.value || '');
+                } else {
+                    jsonData[this.name] = this.value || '';
+                }
+
+
+            });
+            console.log(jsonData);
+            $.ajax("../data/weather_app.json", {
+                type: "POST",
+                data : jsonData,
+
+            });
+            e.preventDefault();
+
+        });
+    });
+
+    mapboxgl.accessToken = MAPBOX_TOKEN_OPEN_WEATHER;
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/malikwillis17/cl8144lk5004y14pf19cpmv4e',
+        center: [-96.775621, 32.817754],
+        zoom: 1,
+    });
+    const marker = new mapboxgl.Marker({
+        draggable: true
+    })
+        .setLngLat([0, 0])
+        .addTo(map);
+
+    function onDragEnd() {
+        const lngLat = marker.getLngLat();
+        coordinates.style.display = 'block';
+        coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+    }
+    marker.on('dragend', onDragEnd);
+
+    geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+        console.log(result);
+        map.setCenter(result);
+        map.setZoom(20);
+
+
+    });
+    console.log(jsonData);
+</script>
+
+<!--                                                 MAPBOX                                                          -->
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+
+
 <!--                                                 BOOTSTRAP CDN                                                   -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
