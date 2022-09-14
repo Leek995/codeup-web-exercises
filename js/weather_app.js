@@ -58,7 +58,6 @@
         return five_day_forecast;
     }
 
-
     $.get('https://api.openweathermap.org/data/2.5/forecast',{
         appid: WEATHER_APP_ID,
         lon: -87.083321,

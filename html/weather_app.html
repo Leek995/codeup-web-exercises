@@ -41,18 +41,19 @@
 <div id="five-day-forecast"></div>
 <div id='map' style='width: 400px; height: 300px;'></div>
 <pre id="coordinates" class="coordinates"></pre>
-
-<form id="addy" type="post">
-    <label for="address-input1">Street Name</label>
-    <input required="required" type="text" id="address-input1" name="street-name" value="1234 ABCD ln" placeholder="Street Name"><br><br>
-    <label for="address-input2">City</label>
-    <input required="required" type="text" id="address-input2" name="city" value="Dallas" placeholder="City"><br><br>
-    <label for="address-input3">State</label>
-    <input required="required" type="text" id="address-input3" name="state" value="Texas" placeholder="State"><br><br>
-    <label for="address-input4">Zipcode</label>
-    <input required="required" type="text" id="address-input4" name="zipcode" value="12345" placeholder="Zipcode"><br><br>
-    <button id="btn">Search</button>
-</form>
+<div class="input-container">
+    <form id="addy" type="post">
+        <label for="address-input1">Street Name</label>
+        <input required="required" type="text" id="address-input1" name="street-name" placeholder="Street Name"><br><br>
+        <label for="address-input2">City</label>
+        <input required="required" type="text" id="address-input2" name="city" placeholder="City"><br><br>
+        <label for="address-input3">State</label>
+        <input required="required" type="text" id="address-input3" name="state" placeholder="State"><br><br>
+        <label for="address-input4">Zipcode</label>
+        <input required="required" type="text" id="address-input4" name="zipcode" placeholder="Zipcode"><br><br>
+        <button id="btn">Search</button>
+    </form>
+</div>
 <!--                                                 jQUERY CDN                                                      -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -78,7 +79,6 @@
                     jsonData[this.name] = this.value || '';
                 }
 
-
             });
             console.log(jsonData);
             $.ajax("../data/weather_app.json", {
@@ -90,34 +90,49 @@
 
         });
     });
-
     mapboxgl.accessToken = MAPBOX_TOKEN_OPEN_WEATHER;
+    // MAPBOX MAP
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/malikwillis17/cl8144lk5004y14pf19cpmv4e',
         center: [-96.775621, 32.817754],
-        zoom: 1,
+        zoom: 5,
     });
+    // creates marker that is draggable by user
     const marker = new mapboxgl.Marker({
         draggable: true
     })
-        .setLngLat([0, 0])
+        .setLngLat([-96.775621, 32.817754])
         .addTo(map);
-
+    // creates functionality which returns lat-long
     function onDragEnd() {
         const lngLat = marker.getLngLat();
         coordinates.style.display = 'block';
         coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+        // converts lat-long to physical address
+        reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
+            .then(function(results) {
+                // converts address to lat long
+                geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+                    console.log(result);
+                    map.setCenter(result);
+                    map.setZoom(5);
+                    console.log(results);
+                });
+            });
     }
+    // marker drag event that triggers capture of lat-long
     marker.on('dragend', onDragEnd);
 
-    geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-        console.log(result);
-        map.setCenter(result);
-        map.setZoom(20);
-
-
+    $('#btn').on('click', event =>{
+        // search functionality convert name into lat long
+        geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(5);
+        });
     });
+
     console.log(jsonData);
 </script>
 
