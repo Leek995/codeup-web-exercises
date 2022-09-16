@@ -10,10 +10,26 @@
     // loop through format to display forecast for each day
     function renderHTML(weatherData){
         let html = '';
-        html += `<div id="five-day-forecast">\n` +
-            `   <h1>Time</h1>\n` +
-            `   <p>${weatherData[0][0]['dt']}</p>/n` +
-            `</div>\n`;
+        for(let i = 0; i < weatherData.length ; ++i)
+                html +=
+                    '               <div class="accordion accordion-flush" id="accordionFlushExample">\n' +
+                    '                    <div class="accordion-item">\n' +
+                    '                        <h2 class="accordion-header" id="flush-headingOne">\n' +
+                    '                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"aria-expanded="false" aria-controls="flush-collapseOne">\n' +
+                    '                                Day 1\n' +
+                    '                            </button>\n' +
+                    '                        </h2>\n' +
+                    '                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">\n' +
+                    '                            <div class="accordion-body">\n' +
+                    '                                <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
+                    '                                <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
+                    '                                <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
+                    '                                <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '                </div>';
+
 
 
         return html;
@@ -46,7 +62,8 @@
 
     $('#btn').on('click', event =>{
         // search functionality convert name into lat long
-        geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+        // geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+        geocode(`${jsonData['address']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
             console.log(result);
             map.setCenter(result);
             map.setZoom(5);

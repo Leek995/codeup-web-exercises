@@ -16,7 +16,7 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin: 0; padding: 0; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #map { top: 0; bottom: 0; width: 100%; }
     </style>
 
     <title>Weather Map</title>
@@ -37,23 +37,70 @@
         display: none;
     }
 </style>
-<h1>Weather APP</h1>
+<header>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">WeatherAPP</a>
+        </div>
+    </nav>
+</header>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col d-none d-sm-block d-sm-none d-md-block">
+            <div class="card" style="width: 25rem;" >
+                <div class="card-body">
+                    <h5 class="card-title">Right Now</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">City</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col">
+                        <div class="map-control">
+                            <div id='map' class="map"></div>
+                        </div>
+                        <div class="col">
+                            <div class="input-container">
+                                <form class="d-flex" id="addy" type="post">
+                                    <input class="form-control w-100 border-0" type="text" placeholder="Search" name="address" aria-label="Search">
+                                    <button class="btn btn-success w-10 border-0" id="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg></button>
+                                    <!--                                <label for="address-input1" class="address-input-label1">Street Name</label>-->
+                                    <!--                                <input required="required" type="text" id="address-input1" name="street-name" class="address-input1"  placeholder="Street Name"><br><br>-->
+                                    <!--                                <label for="address-input2" class="address-input-label2">City</label>-->
+                                    <!--                                <input required="required" type="text" id="address-input2" name="city" class="address-input2" placeholder="City"><br><br>-->
+                                    <!--                                <label for="address-input3" class="address-input-label3">State</label>-->
+                                    <!--                                <input required="required" type="text" id="address-input3" name="state" class="address-input3" placeholder="State"><br><br>-->
+                                    <!--                                <label for="address-input4" class="address-input-label4">Zipcode</label>-->
+                                    <!--                                <input required="required" type="text" id="address-input4" name="zipcode" class="address-input4" placeholder="Zipcode"><br><br>-->
+                                    <!--                                <button id="btn" class="search-btn1">Search</button>-->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weather-data">
+        <div class="row">
+            <div class="col">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
 <div id="five-day-forecast"></div>
-<div id='map' style='width: 400px; height: 300px;'></div>
 <pre id="coordinates" class="coordinates"></pre>
-<div class="input-container">
-    <form id="addy" type="post">
-        <label for="address-input1">Street Name</label>
-        <input required="required" type="text" id="address-input1" name="street-name"  placeholder="Street Name"><br><br>
-        <label for="address-input2">City</label>
-        <input required="required" type="text" id="address-input2" name="city" placeholder="City"><br><br>
-        <label for="address-input3">State</label>
-        <input required="required" type="text" id="address-input3" name="state" placeholder="State"><br><br>
-        <label for="address-input4">Zipcode</label>
-        <input required="required" type="text" id="address-input4" name="zipcode" placeholder="Zipcode"><br><br>
-        <button id="btn">Search</button>
-    </form>
-</div>
+
 <!--                                                 jQUERY CDN                                                      -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -65,7 +112,6 @@
 <script type="text/javascript">
     var jsonData = {};
     const submitBtn = $('#btn');
-
     submitBtn.click(function(e){
         $(document).ready(function() {
             var formData = $("#addy").serializeArray();
@@ -79,16 +125,9 @@
                 } else {
                     jsonData[this.name] = this.value || '';
                 }
-
             });
             console.log(jsonData);
-            $.ajax("../data/weather_app.json", {
-                type: "POST",
-                data : jsonData,
-
-            });
             e.preventDefault();
-            console.log(e);
         });
     });
     mapboxgl.accessToken = MAPBOX_TOKEN_OPEN_WEATHER;
@@ -99,42 +138,7 @@
         center: [-96.775621, 32.817754],
         zoom: 1,
     });
-    // // creates marker that is draggable by user
-    // const marker = new mapboxgl.Marker({
-    //     draggable: true
-    // })
-    //     .setLngLat([-96.775621, 32.817754])
-    //     .addTo(map);
-    // // creates functionality which returns lat-long
-    // function onDragEnd() {
-    //     const lngLat = marker.getLngLat();
-    //     coordinates.style.display = 'block';
-    //     coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
-    //     // converts lat-long to physical address
-    //     reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
-    //         .then(function(results) {
-    //             // converts address to lat long
-    //             geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-    //                 console.log(result);
-    //                 map.setCenter(result);
-    //                 map.setZoom(5);
-    //                 console.log(results);
-    //             });
-    //         });
-    // }
-    // // marker drag event that triggers capture of lat-long
-    // marker.on('dragend', onDragEnd);
-    //
-    // $('#btn').on('click', event =>{
-    //     // search functionality convert name into lat long
-    //     geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-    //         console.log(result);
-    //         map.setCenter(result);
-    //         map.setZoom(5);
-    //     });
-    // });
-    //
-    // console.log(jsonData);
+
 </script>
 
 <!--                                                 MAPBOX                                                          -->
