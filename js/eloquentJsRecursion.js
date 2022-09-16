@@ -9,4 +9,6 @@
         isEven(number);
     }
     isEven(5);
+    let stringbinding = "malik";
+    console.log(stringbinding[stringbinding.length -1])
 })();
