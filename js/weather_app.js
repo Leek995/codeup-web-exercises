@@ -5,8 +5,7 @@
 (function (){
     "use strict"
     console.log('testing conection');
-    // 1.) create a function to render html to page from five day forecast function
-    // TODO
+
     // create structure of data in a table format on HTML file and in function
     // loop through format to display forecast for each day
     function renderHTML(weatherData){
@@ -19,23 +18,10 @@
 
         return html;
     }
-    // 1.) Update your layout and AJAX request(s) to display a five day forecast for the city you
-    //      live in that looks like the screenshot below.
-    //TODO
-    // create a function that takes in weather data as a argument
-    // inetrate through list to find list of 3hr forecast. single out list and store in new binding
-    // convert 3hr forecast to 1Day forecast
-    // iterate through
-
     // Separates weather data from all other datasets in JSON object from OpenWeather API
     function fiveDayForeCast(weatherData){
         // stores weather 3hr weather forecast in binding
         let forecast = weatherData['list'];
-        // console.log(forecast);
-        // let day_forecast = [];
-        // day_forecast = forecast.splice(0,8);
-        // console.log(day_forecast);
-        // create empty list to store 5-day forecast
         let five_day_forecast = [];
         // iterate through 3hr weather array to convert to a day format of 3hr forecast for next 5-days
         while(forecast.length){
@@ -57,31 +43,6 @@
         console.log(five_day_forecast);
         return five_day_forecast;
     }
-    // // creates marker that is draggable by user
-    // const marker = new mapboxgl.Marker({
-    //     draggable: true
-    // })
-    //     .setLngLat([-96.775621, 32.817754])
-    //     .addTo(map);
-    // // creates functionality which returns lat-long
-    // function onDragEnd() {
-    //     const lngLat = marker.getLngLat();
-    //     coordinates.style.display = 'block';
-    //     coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
-    //     // converts lat-long to physical address
-    //     reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
-    //         .then(function(results) {
-    //             // converts address to lat long
-    //             geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-    //                 console.log(result);
-    //                 map.setCenter(result);
-    //                 map.setZoom(5);
-    //                 console.log(results);
-    //             });
-    //         });
-    // }
-    // // marker drag event that triggers capture of lat-long
-    // marker.on('dragend', onDragEnd);
 
     $('#btn').on('click', event =>{
         // search functionality convert name into lat long
@@ -97,27 +58,29 @@
     })
         .setLngLat([-96.775621, 32.817754])
         .addTo(map);
-    let xy = marker.getLngLat();
-    console.log(xy);
-    $.get('https://api.openweathermap.org/data/2.5/forecast',{
-        appid: WEATHER_APP_ID,
-        lon: xy['lng'], //resultsLong
-        lat: xy['lat'], //resultsLat
-        unit: 'imperial',
-    }).done(function (data){
-        console.log(data);
-        // fiveDayForeCast(data);
-        let weatherData = fiveDayForeCast(data);
-
-        let fiveDayForeCastHTML = renderHTML(weatherData);
-        $('#five-day-forecast').html(fiveDayForeCastHTML);
-        // creates marker that is draggable by user
 
         // creates functionality which returns lat-long
         function onDragEnd() {
             const lngLat = marker.getLngLat();
             coordinates.style.display = 'block';
             coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+            // console.log(coordinates);
+            $.get('https://api.openweathermap.org/data/2.5/forecast',{
+                appid: WEATHER_APP_ID,
+                lon: lngLat.lng, //resultsLong
+                lat: lngLat.lat, //resultsLat
+                unit: 'imperial',
+            }).done(function (data){
+                console.log(data);
+                // fiveDayForeCast(data);
+                let weatherData = fiveDayForeCast(data);
+                let fiveDayForeCastHTML = renderHTML(weatherData);
+                $('#five-day-forecast').html(fiveDayForeCastHTML);
+                // creates marker that is draggable by user
+
+            }).fail(function (error){
+                console.log(error);
+            })
             // converts lat-long to physical address
             reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
                 .then(function(results) {
@@ -129,11 +92,7 @@
                         console.log(results);
                     });
                 });
-        }
+            }
         // marker drag event that triggers capture of lat-long
         marker.on('dragend', onDragEnd);
-    }).fail(function (error){
-        console.log(error);
-    })
-
 })();
