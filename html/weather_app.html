@@ -44,7 +44,7 @@
 <div class="input-container">
     <form id="addy" type="post">
         <label for="address-input1">Street Name</label>
-        <input required="required" type="text" id="address-input1" name="street-name" placeholder="Street Name"><br><br>
+        <input required="required" type="text" id="address-input1" name="street-name"  placeholder="Street Name"><br><br>
         <label for="address-input2">City</label>
         <input required="required" type="text" id="address-input2" name="city" placeholder="City"><br><br>
         <label for="address-input3">State</label>
@@ -64,11 +64,12 @@
 <script src="../js/mapbox-geocoder-utils.js"></script>
 <script type="text/javascript">
     var jsonData = {};
-    $(document).ready(function() {
-        $("#btn").click(function(e){
+    const submitBtn = $('#btn');
+
+    submitBtn.click(function(e){
+        $(document).ready(function() {
             var formData = $("#addy").serializeArray();
             // console.log(formData);
-
             $.each(formData, function() {
                 if (jsonData[this.name]) {
                     if (!jsonData[this.name].push) {
@@ -87,7 +88,7 @@
 
             });
             e.preventDefault();
-
+            console.log(e);
         });
     });
     mapboxgl.accessToken = MAPBOX_TOKEN_OPEN_WEATHER;
@@ -96,44 +97,44 @@
         container: 'map',
         style: 'mapbox://styles/malikwillis17/cl8144lk5004y14pf19cpmv4e',
         center: [-96.775621, 32.817754],
-        zoom: 5,
+        zoom: 1,
     });
-    // creates marker that is draggable by user
-    const marker = new mapboxgl.Marker({
-        draggable: true
-    })
-        .setLngLat([-96.775621, 32.817754])
-        .addTo(map);
-    // creates functionality which returns lat-long
-    function onDragEnd() {
-        const lngLat = marker.getLngLat();
-        coordinates.style.display = 'block';
-        coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
-        // converts lat-long to physical address
-        reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
-            .then(function(results) {
-                // converts address to lat long
-                geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-                    console.log(result);
-                    map.setCenter(result);
-                    map.setZoom(5);
-                    console.log(results);
-                });
-            });
-    }
-    // marker drag event that triggers capture of lat-long
-    marker.on('dragend', onDragEnd);
-
-    $('#btn').on('click', event =>{
-        // search functionality convert name into lat long
-        geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-            console.log(result);
-            map.setCenter(result);
-            map.setZoom(5);
-        });
-    });
-
-    console.log(jsonData);
+    // // creates marker that is draggable by user
+    // const marker = new mapboxgl.Marker({
+    //     draggable: true
+    // })
+    //     .setLngLat([-96.775621, 32.817754])
+    //     .addTo(map);
+    // // creates functionality which returns lat-long
+    // function onDragEnd() {
+    //     const lngLat = marker.getLngLat();
+    //     coordinates.style.display = 'block';
+    //     coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+    //     // converts lat-long to physical address
+    //     reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
+    //         .then(function(results) {
+    //             // converts address to lat long
+    //             geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+    //                 console.log(result);
+    //                 map.setCenter(result);
+    //                 map.setZoom(5);
+    //                 console.log(results);
+    //             });
+    //         });
+    // }
+    // // marker drag event that triggers capture of lat-long
+    // marker.on('dragend', onDragEnd);
+    //
+    // $('#btn').on('click', event =>{
+    //     // search functionality convert name into lat long
+    //     geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+    //         console.log(result);
+    //         map.setCenter(result);
+    //         map.setZoom(5);
+    //     });
+    // });
+    //
+    // console.log(jsonData);
 </script>
 
 <!--                                                 MAPBOX                                                          -->
@@ -145,6 +146,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <!--                                                 JS FILE                                                         -->
-<script src="../js/weather_app.js"></script>
+<script type="module" src="../js/weather_app.js"></script>
 </body>
 </html>

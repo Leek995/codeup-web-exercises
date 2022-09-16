@@ -57,18 +57,81 @@
         console.log(five_day_forecast);
         return five_day_forecast;
     }
+    // // creates marker that is draggable by user
+    // const marker = new mapboxgl.Marker({
+    //     draggable: true
+    // })
+    //     .setLngLat([-96.775621, 32.817754])
+    //     .addTo(map);
+    // // creates functionality which returns lat-long
+    // function onDragEnd() {
+    //     const lngLat = marker.getLngLat();
+    //     coordinates.style.display = 'block';
+    //     coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+    //     // converts lat-long to physical address
+    //     reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
+    //         .then(function(results) {
+    //             // converts address to lat long
+    //             geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+    //                 console.log(result);
+    //                 map.setCenter(result);
+    //                 map.setZoom(5);
+    //                 console.log(results);
+    //             });
+    //         });
+    // }
+    // // marker drag event that triggers capture of lat-long
+    // marker.on('dragend', onDragEnd);
 
+    $('#btn').on('click', event =>{
+        // search functionality convert name into lat long
+        geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+            console.log(result);
+            map.setCenter(result);
+            map.setZoom(5);
+            marker.setLngLat([result[0],result[1]]);
+        });
+    });
+    const marker = new mapboxgl.Marker({
+        draggable: true
+    })
+        .setLngLat([-96.775621, 32.817754])
+        .addTo(map);
+    let xy = marker.getLngLat();
+    console.log(xy);
     $.get('https://api.openweathermap.org/data/2.5/forecast',{
         appid: WEATHER_APP_ID,
-        lon: -87.083321,
-        lat: 32.333469,
+        lon: xy['lng'], //resultsLong
+        lat: xy['lat'], //resultsLat
         unit: 'imperial',
     }).done(function (data){
         console.log(data);
         // fiveDayForeCast(data);
         let weatherData = fiveDayForeCast(data);
+
         let fiveDayForeCastHTML = renderHTML(weatherData);
         $('#five-day-forecast').html(fiveDayForeCastHTML);
+        // creates marker that is draggable by user
+
+        // creates functionality which returns lat-long
+        function onDragEnd() {
+            const lngLat = marker.getLngLat();
+            coordinates.style.display = 'block';
+            coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+            // converts lat-long to physical address
+            reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
+                .then(function(results) {
+                    // converts address to lat long
+                    geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+                        console.log(result);
+                        map.setCenter(result);
+                        map.setZoom(5);
+                        console.log(results);
+                    });
+                });
+        }
+        // marker drag event that triggers capture of lat-long
+        marker.on('dragend', onDragEnd);
     }).fail(function (error){
         console.log(error);
     })
