@@ -19,7 +19,24 @@
         margin-right: auto;
         border-radius: 3px;
     }
+    .weather-data{
 
+
+    }
+    .weather-stats{
+
+
+    }
+    .stats{
+
+    }
+    .stat-icon{
+
+
+    }
+    p{
+        margin: 0px;
+    }
 
 }
 

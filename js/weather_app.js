@@ -10,28 +10,72 @@
     // loop through format to display forecast for each day
     function renderHTML(weatherData){
         let html = '';
-        for(let i = 0; i < weatherData.length ; ++i)
-                html +=
-                    '               <div class="accordion accordion-flush" id="accordionFlushExample">\n' +
-                    '                    <div class="accordion-item">\n' +
-                    '                        <h2 class="accordion-header" id="flush-headingOne">\n' +
-                    '                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"aria-expanded="false" aria-controls="flush-collapseOne">\n' +
-                    '                                Day 1\n' +
-                    '                            </button>\n' +
-                    '                        </h2>\n' +
-                    '                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">\n' +
-                    '                            <div class="accordion-body">\n' +
-                    '                                <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
-                    '                                <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
-                    '                                <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
-                    '                                <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
-                    '                            </div>\n' +
-                    '                        </div>\n' +
-                    '                    </div>\n' +
-                    '                </div>';
+        // console.log(`http://openweathermap.org/img/w/${weatherData[i][0]['weather'][0]['id']}.png`);
+        for(let i = 0; i < weatherData.length ; ++i){
+            html +=
+                '                   <div class="weather-stats">\n' +
+                '                    <div class="container text-center">\n' +
+                '                        <div class="row">\n' +
+                '                            <div class="col">\n' +
+                '                                <figure>\n' +
+                `                                    <div id="icon"><img src="http://openweathermap.org/img/wn/${weatherData[i][0]['weather'][0]['icon']}.png"></div>\n` +
+                '                                    <figcaption>weather</figcaption>\n' +
+                '                                </figure>\n' +
+                '                            </div>\n' +
+                '                            <div class="col">\n' +
+                '                                <div class="stats">\n' +
+                '                                   <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
+                '                                   <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
+                '                                   <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
+                '                                   <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '                        </div>\n' +
+                '                    </div>';
+        }
 
-
-
+                // '                   <div class="container text-center">\n' +
+                // '                        <div class="row">\n' +
+                // '                            <div class="col-2">\n' +
+                // '                                <div class="stat-icon">\n' +
+                // '                                    <figure>\n' +
+                // '                                        Icon\n' +
+                // '                                        <figcaption>weather</figcaption>\n' +
+                // '                                    </figure>\n' +
+                // '                                </div>\n' +
+                // '                            </div>\n' +
+                // '                            <div class="col">\n' +
+                // '                                <div class="stats">\n' +
+                // '                                   <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
+                // '                                   <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
+                // '                                   <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
+                // '                                   <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
+                // '                            </div>\n' +
+                // '                        </div>\n' +
+                // '                    </div>';
+                // '<div class="weather-stats">\n' +
+                // '                    <div class="stat-icon">\n' +
+                // '                        <figure>\n' +
+                // '                            Icon\n' +
+                // '                            <figcaption>weather</figcaption>\n' +
+                // '                        </figure>\n' +
+                // '                    </div>\n' +
+                // '                    <div class="stats">\n' +
+                // '                       <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
+                // '                       <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
+                // '                       <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
+                // '                       <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
+                // '                    </div>\n' +
+                // '                </div>';
+                // '                   <div class="weather-data">\n' +
+                // '                   <div class="stat-icon"></div>\n' +
+                // '                    <div class="stats">\n' +
+                // // '                       <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
+                // // '                       <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
+                // // '                       <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
+                // // '                       <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
+                // '                    </div>\n' +
+                // '                   </div>'
         return html;
     }
     // Separates weather data from all other datasets in JSON object from OpenWeather API
@@ -76,40 +120,40 @@
         .setLngLat([-96.775621, 32.817754])
         .addTo(map);
 
-        // creates functionality which returns lat-long
-        function onDragEnd() {
-            const lngLat = marker.getLngLat();
-            coordinates.style.display = 'block';
-            coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
-            // console.log(coordinates);
-            $.get('https://api.openweathermap.org/data/2.5/forecast',{
-                appid: WEATHER_APP_ID,
-                lon: lngLat.lng, //resultsLong
-                lat: lngLat.lat, //resultsLat
-                unit: 'imperial',
-            }).done(function (data){
-                console.log(data);
-                // fiveDayForeCast(data);
-                let weatherData = fiveDayForeCast(data);
-                let fiveDayForeCastHTML = renderHTML(weatherData);
-                $('#five-day-forecast').html(fiveDayForeCastHTML);
-                // creates marker that is draggable by user
+    // creates functionality which returns lat-long
+    function onDragEnd() {
+        const lngLat = marker.getLngLat();
+        coordinates.style.display = 'block';
+        coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+        // console.log(coordinates);
+        $.get('https://api.openweathermap.org/data/2.5/forecast',{
+            appid: WEATHER_APP_ID,
+            lon: lngLat.lng, //resultsLong
+            lat: lngLat.lat, //resultsLat
+            unit: 'imperial',
+        }).done(function (data){
+            console.log(data);
+            // fiveDayForeCast(data);
+            let weatherData = fiveDayForeCast(data);
+            let fiveDayForeCastHTML = renderHTML(weatherData);
+            $('.weather-stats').html(fiveDayForeCastHTML);
+            // creates marker that is draggable by user
 
-            }).fail(function (error){
-                console.log(error);
-            })
-            // converts lat-long to physical address
-            reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
-                .then(function(results) {
-                    // converts address to lat long
-                    geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-                        console.log(result);
-                        map.setCenter(result);
-                        map.setZoom(5);
-                        console.log(results);
-                    });
+        }).fail(function (error){
+            console.log(error);
+        })
+        // converts lat-long to physical address
+        reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
+            .then(function(results) {
+                // converts address to lat long
+                geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
+                    console.log(result);
+                    map.setCenter(result);
+                    map.setZoom(5);
+                    console.log(results);
                 });
-            }
-        // marker drag event that triggers capture of lat-long
-        marker.on('dragend', onDragEnd);
+            });
+    }
+    // marker drag event that triggers capture of lat-long
+    marker.on('dragend', onDragEnd);
 })();
