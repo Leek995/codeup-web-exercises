@@ -4,7 +4,7 @@
 //MAPBOX
 (function (){
     "use strict"
-    console.log('testing conection');
+    console.log('testing connection');
     function renderRightNow(weatherData, data){
         let html = '';
         html +=
@@ -13,7 +13,7 @@
             '                        <div class="row">\n' +
             '                            <div class="col rounded bg-opacity-25 text-white bg-primary">\n' +
             '                                <h6 class="pt-4">Right now</h6>\n' +
-            '                                <small>' + data['city']['name'] + '</small>\n' +
+            '                                <large>' + data['city']['name'] + '</large>\n' +
             '                                <figure>\n' +
             `                                    <div id="icon"><img src="http://openweathermap.org/img/wn/${weatherData[0][0]['weather'][0]['icon']}.png"></div>\n` +
             '                                    <figcaption>' + weatherData[0][0]['main']['temp']+ ' F<span>&#176</span>' + '</figcaption>\n' +
@@ -82,69 +82,60 @@
                 // Break if forecast length is not divisible by 8
                 break;
             }
-
         }
-        console.log(five_day_forecast);
         return five_day_forecast;
     }
-
+    // submission button event that triggers the geocode which turns typed address into lat-long coordinates
     $('#btn').on('click', event =>{
         // search functionality convert name into lat long
-        // geocode(`${jsonData['street-name']}, ${jsonData['city']}, ${jsonData['state']} ${jsonData['zipcode']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
         geocode(`${jsonData['address']}`, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-            console.log(result);
+            delete jsonData['address'];
             map.setCenter(result);
-            map.setZoom(5);
+            map.setZoom(7);
             marker.setLngLat([result[0],result[1]]);
-
         });
     });
+    // create marker via @OpenWeather API
     const marker = new mapboxgl.Marker({
         draggable: true
     })
         .setLngLat([-96.775621, 32.817754])
         .addTo(map);
 
-    // creates functionality which returns lat-long
+    // creates functionality which returns lat-long when event is triggers by the way of the marker
     function onDragEnd() {
         const lngLat = marker.getLngLat();
         coordinates.style.display = 'block';
         coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
-        // console.log(coordinates);
         $.get('https://api.openweathermap.org/data/2.5/forecast',{
             appid: WEATHER_APP_ID,
             lon: lngLat.lng, //resultsLong
             lat: lngLat.lat, //resultsLat
             units: 'imperial',
         }).done(function (data){
-            console.log(data);
-            // fiveDayForeCast(data);
+            // Rendering all HTML
             let weatherData = fiveDayForeCast(data);
             let rightNowHTML = renderRightNow(weatherData, data);
             let fiveDayForeCastHTML = renderHTML(weatherData);
             $('.weather-stats').html(fiveDayForeCastHTML);
             marker.on('dragend', $('.right-now').html(rightNowHTML));
-            // creates marker that is draggable by user
-
+            $('#btn').on('click', onDragEnd);
         }).fail(function (error){
             console.log(error);
         })
         // converts lat-long to physical address
         reverseGeocode(marker.getLngLat() ,MAPBOX_TOKEN_OPEN_WEATHER )
             .then(function(results) {
-                // converts address to lat long
+                // converts physical address to lat long
                 geocode(results, MAPBOX_TOKEN_OPEN_WEATHER).then(function(result) {
-                    console.log(result);
                     map.setCenter(result);
-                    map.setZoom(5);
-                    console.log(results);
-
+                    map.setZoom(7);
                 });
             });
     }
     // marker drag event that triggers capture of lat-long
     marker.on('dragend', onDragEnd);
-    $('#btn').on('click', onDragEnd);
+
 
 
 })();
