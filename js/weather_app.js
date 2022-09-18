@@ -11,12 +11,12 @@
             '               <div class="right-now">\n' +
             '                    <div class="container text-center ">\n' +
             '                        <div class="row">\n' +
-            '                            <div class="col text-white bg-primary">\n' +
-            '                                <h6>Right now</h6>\n' +
+            '                            <div class="col rounded bg-opacity-25 text-white bg-primary">\n' +
+            '                                <h6 class="pt-4">Right now</h6>\n' +
             '                                <small>' + data['city']['name'] + '</small>\n' +
             '                                <figure>\n' +
             `                                    <div id="icon"><img src="http://openweathermap.org/img/wn/${weatherData[0][0]['weather'][0]['icon']}.png"></div>\n` +
-            '                                    <figcaption>' + weatherData[0][0]['main']['temp'] + '</figcaption>\n' +
+            '                                    <figcaption>' + weatherData[0][0]['main']['temp']+ ' F<span>&#176</span>' + '</figcaption>\n' +
             '                                </figure>\n' +
             '                            </div>\n' +
             '                            <div class="col-8">\n' +
@@ -42,16 +42,16 @@
                 '                 <div class="weather-stats">\n' +
                 '                    <div class="container text-center mb-2">\n' +
                 '                        <div class="row">\n' +
-                '                            <div class="col text-white bg-primary">\n' +
-                '                                <h6>'+weatherData[i][0]["dt_txt"] +'</h6>\n' +
+                '                            <div class="col rounded bg-opacity-25 text-white bg-primary">\n' +
+                '                                <h6 class="pt-4">'+weatherData[i][0]["dt_txt"] +'</h6>\n' +
                 '                                <figure>\n' +
                 `                                    <div id="icon"><img src="http://openweathermap.org/img/wn/${weatherData[i][0]['weather'][0]['icon']}.png"></div>\n` +
-                '                                    <figcaption>'+ weatherData[i][0]['main']['temp']+'</figcaption>\n' +
+                '                                    <figcaption>'+ weatherData[i][0]['main']['temp'] + ' F<span>&#176</span></figcaption>\n' +
                 '                                </figure>\n' +
                 '                            </div>\n' +
                 '                            <div class="col-8">\n' +
                 '                                <div class="stats">\n' +
-                '                                   <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
+                '                                   <p>' + weatherData[i][0]['weather'][0]['description']+ '</p>\n' +
                 '                                   <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
                 '                                   <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
                 '                                   <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
@@ -96,6 +96,7 @@
             map.setCenter(result);
             map.setZoom(5);
             marker.setLngLat([result[0],result[1]]);
+
         });
     });
     const marker = new mapboxgl.Marker({
@@ -137,10 +138,13 @@
                     map.setCenter(result);
                     map.setZoom(5);
                     console.log(results);
+
                 });
             });
     }
     // marker drag event that triggers capture of lat-long
     marker.on('dragend', onDragEnd);
+    $('#btn').on('click', onDragEnd);
+
 
 })();
