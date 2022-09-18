@@ -17,12 +17,7 @@
         "temp_kf": -1.11
       },
       "weather": [
-        {
-          "id": 500,
-          "main": "Rain",
-          "description": "light rain",
-          "icon": "10d"
-        }
+        {"id": 500, "main": "Rain", "description": "light rain", "icon": "10d"}
       ],
       "clouds": {
         "all": 100

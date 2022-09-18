@@ -14,6 +14,11 @@
     <!--                                             MAPBOX CDN                                                      -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
     <style>
         body { margin: 0; padding: 0; }
         #map { top: 0; bottom: 0; width: 100%; }
@@ -40,7 +45,10 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">WeatherAPP</a>
+            <a class="navbar-brand ms-2" href="#">WeatherAPP</a>
+            <p class="me-2" style="color: #1e5eff"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+                <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+            </svg> | F<span>&#176</span></p>
         </div>
     </nav>
 </header>
@@ -64,22 +72,30 @@
                             <div id='map' class="map"></div>
                         </div>
                         <div class="col">
-                            <div class="input-container">
-                                <form class="d-flex" id="addy" type="post">
-                                    <input class="form-control w-100 border-0" type="text" placeholder="Search" name="address" aria-label="Search">
-                                    <button class="btn btn-success w-10 border-0" id="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                    </svg></button>
-                                    <!--                                <label for="address-input1" class="address-input-label1">Street Name</label>-->
-                                    <!--                                <input required="required" type="text" id="address-input1" name="street-name" class="address-input1"  placeholder="Street Name"><br><br>-->
-                                    <!--                                <label for="address-input2" class="address-input-label2">City</label>-->
-                                    <!--                                <input required="required" type="text" id="address-input2" name="city" class="address-input2" placeholder="City"><br><br>-->
-                                    <!--                                <label for="address-input3" class="address-input-label3">State</label>-->
-                                    <!--                                <input required="required" type="text" id="address-input3" name="state" class="address-input3" placeholder="State"><br><br>-->
-                                    <!--                                <label for="address-input4" class="address-input-label4">Zipcode</label>-->
-                                    <!--                                <input required="required" type="text" id="address-input4" name="zipcode" class="address-input4" placeholder="Zipcode"><br><br>-->
-                                    <!--                                <button id="btn" class="search-btn1">Search</button>-->
-                                </form>
+                            <div class="input-container ps-0">
+                                <nav class="navbar">
+                                    <div class="container-fluid p-0">
+                                        <form class="d-flex w-100" id="addy" type="post">
+                                            <input class="form-control w-100 me-2"  type="text" placeholder="Search" name="address" aria-label="Search">
+                                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                                        </form>
+                                    </div>
+<!--                                </nav>-->
+<!--                                <form class="d-flex" id="addy" type="post">-->
+<!--                                    <input class="form-control w-100 border-0" type="text" placeholder="Search" name="address" aria-label="Search">-->
+<!--                                    <button class="btn btn-success w-10 border-0" id="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">-->
+<!--                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>-->
+<!--                                    </svg></button>-->
+<!--                                    &lt;!&ndash;                                <label for="address-input1" class="address-input-label1">Street Name</label>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <input required="required" type="text" id="address-input1" name="street-name" class="address-input1"  placeholder="Street Name"><br><br>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <label for="address-input2" class="address-input-label2">City</label>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <input required="required" type="text" id="address-input2" name="city" class="address-input2" placeholder="City"><br><br>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <label for="address-input3" class="address-input-label3">State</label>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <input required="required" type="text" id="address-input3" name="state" class="address-input3" placeholder="State"><br><br>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <label for="address-input4" class="address-input-label4">Zipcode</label>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <input required="required" type="text" id="address-input4" name="zipcode" class="address-input4" placeholder="Zipcode"><br><br>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                <button id="btn" class="search-btn1">Search</button>&ndash;&gt;-->
+<!--                                </form>-->
                             </div>
                         </div>
                     </div>
@@ -87,35 +103,26 @@
             </div>
         </div>
     </div>
+    <h1 class="text-primary mt-4">5-Day Forecast</h1>
     <div class="weather-data">
         <div class="row">
             <div class="col">
+                <div class="right-now">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <div class="weather-stats">
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col">
-                                <figure>
-                                    <figcaption>weather</figcaption>
-                                </figure>
-                            </div>
-                            <div class="col">
-                                <div class="stats">
-                                    <p>Description</p>
-                                    <p>Humidity</p>
-                                    <p>Wind-Speed</p>
-                                    <p>Pressure</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <div id="five-day-forecast"></div>
-<pre id="coordinates" class="coordinates"></pre>
+<pre id="coordinates" class="coordinates" style="visibility: hidden"></pre>
 
 <!--                                                 jQUERY CDN                                                      -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"

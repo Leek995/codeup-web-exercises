@@ -5,24 +5,51 @@
 (function (){
     "use strict"
     console.log('testing conection');
-
+    function renderRightNow(weatherData, data){
+        let html = '';
+        html +=
+            '               <div class="right-now">\n' +
+            '                    <div class="container text-center ">\n' +
+            '                        <div class="row">\n' +
+            '                            <div class="col text-white bg-primary">\n' +
+            '                                <h6>Right now</h6>\n' +
+            '                                <small>' + data['city']['name'] + '</small>\n' +
+            '                                <figure>\n' +
+            `                                    <div id="icon"><img src="http://openweathermap.org/img/wn/${weatherData[0][0]['weather'][0]['icon']}.png"></div>\n` +
+            '                                    <figcaption>' + weatherData[0][0]['main']['temp'] + '</figcaption>\n' +
+            '                                </figure>\n' +
+            '                            </div>\n' +
+            '                            <div class="col-8">\n' +
+            '                                <div class="stats">\n' +
+            '                                   <p>' + weatherData[0][0]['weather'][0]['description'] + '</p>\n' +
+            '                                   <p>Humidity: ' + weatherData[0][0]['main']['humidity'] + '%' + '</p>\n' +
+            '                                   <p>Wind-Speed: ' + weatherData[0][0]['wind']['speed'] + ' mph' + '</p>\n' +
+            '                                   <p>Pressure: ' + weatherData[0][0]['main']['pressure'] + '</p>\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                </div>'
+        return html;
+    }
     // create structure of data in a table format on HTML file and in function
     // loop through format to display forecast for each day
     function renderHTML(weatherData){
         let html = '';
         // console.log(`http://openweathermap.org/img/w/${weatherData[i][0]['weather'][0]['id']}.png`);
-        for(let i = 0; i < weatherData.length ; ++i){
+        for(let i = 1; i < weatherData.length ; ++i){
             html +=
-                '                   <div class="weather-stats">\n' +
-                '                    <div class="container text-center">\n' +
+                '                 <div class="weather-stats">\n' +
+                '                    <div class="container text-center mb-2">\n' +
                 '                        <div class="row">\n' +
-                '                            <div class="col">\n' +
+                '                            <div class="col text-white bg-primary">\n' +
+                '                                <h6>'+weatherData[i][0]["dt_txt"] +'</h6>\n' +
                 '                                <figure>\n' +
                 `                                    <div id="icon"><img src="http://openweathermap.org/img/wn/${weatherData[i][0]['weather'][0]['icon']}.png"></div>\n` +
-                '                                    <figcaption>weather</figcaption>\n' +
+                '                                    <figcaption>'+ weatherData[i][0]['main']['temp']+'</figcaption>\n' +
                 '                                </figure>\n' +
                 '                            </div>\n' +
-                '                            <div class="col">\n' +
+                '                            <div class="col-8">\n' +
                 '                                <div class="stats">\n' +
                 '                                   <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
                 '                                   <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
@@ -33,49 +60,6 @@
                 '                        </div>\n' +
                 '                    </div>';
         }
-
-                // '                   <div class="container text-center">\n' +
-                // '                        <div class="row">\n' +
-                // '                            <div class="col-2">\n' +
-                // '                                <div class="stat-icon">\n' +
-                // '                                    <figure>\n' +
-                // '                                        Icon\n' +
-                // '                                        <figcaption>weather</figcaption>\n' +
-                // '                                    </figure>\n' +
-                // '                                </div>\n' +
-                // '                            </div>\n' +
-                // '                            <div class="col">\n' +
-                // '                                <div class="stats">\n' +
-                // '                                   <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
-                // '                                   <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
-                // '                                   <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
-                // '                                   <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
-                // '                            </div>\n' +
-                // '                        </div>\n' +
-                // '                    </div>';
-                // '<div class="weather-stats">\n' +
-                // '                    <div class="stat-icon">\n' +
-                // '                        <figure>\n' +
-                // '                            Icon\n' +
-                // '                            <figcaption>weather</figcaption>\n' +
-                // '                        </figure>\n' +
-                // '                    </div>\n' +
-                // '                    <div class="stats">\n' +
-                // '                       <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
-                // '                       <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
-                // '                       <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
-                // '                       <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
-                // '                    </div>\n' +
-                // '                </div>';
-                // '                   <div class="weather-data">\n' +
-                // '                   <div class="stat-icon"></div>\n' +
-                // '                    <div class="stats">\n' +
-                // // '                       <p>Description: ' + weatherData[i][0]['weather'][0]['description'] + '</p>\n' +
-                // // '                       <p>Humidity: ' + weatherData[i][0]['main']['humidity'] + '</p>\n' +
-                // // '                       <p>Wind-Speed: ' + weatherData[i][0]['wind']['speed'] + '</p>\n' +
-                // // '                       <p>Pressure: ' + weatherData[i][0]['main']['pressure']+ '</p>\n' +
-                // '                    </div>\n' +
-                // '                   </div>'
         return html;
     }
     // Separates weather data from all other datasets in JSON object from OpenWeather API
@@ -130,13 +114,15 @@
             appid: WEATHER_APP_ID,
             lon: lngLat.lng, //resultsLong
             lat: lngLat.lat, //resultsLat
-            unit: 'imperial',
+            units: 'imperial',
         }).done(function (data){
             console.log(data);
             // fiveDayForeCast(data);
             let weatherData = fiveDayForeCast(data);
+            let rightNowHTML = renderRightNow(weatherData, data);
             let fiveDayForeCastHTML = renderHTML(weatherData);
             $('.weather-stats').html(fiveDayForeCastHTML);
+            marker.on('dragend', $('.right-now').html(rightNowHTML));
             // creates marker that is draggable by user
 
         }).fail(function (error){
@@ -156,4 +142,5 @@
     }
     // marker drag event that triggers capture of lat-long
     marker.on('dragend', onDragEnd);
+
 })();

@@ -1,42 +1,43 @@
 /******************       EXTRA SMALL (XS) screen sizes following bootstrap breakpoints            ********************/
 @media screen and (max-width:576px){
+    body{
+        font-family: 'Oxygen', sans-serif;
+    }
     h1{
         color: blue;
     }
     .input-container{
-        margin: 25px auto;
+        margin: 0px auto;
         width: 100%;
-        border: 1px solid black;
-        border-radius: 5px;
     }
     .addy{
-        width: 60%;
+        width: 100%;
     }
     .map{
         width: 600px;
-        height: 300px;
+        height: 400px;
         margin-left: auto;
         margin-right: auto;
         border-radius: 3px;
     }
+    .right-now{
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
     .weather-data{
-
-
+        margin-right: auto;
+        margin-left: auto;
     }
     .weather-stats{
-
-
-    }
-    .stats{
-
-    }
-    .stat-icon{
-
-
+        margin-bottom: 10px;
     }
     p{
         margin: 0px;
     }
+    .stats{
+        padding-top: 15px;
+    }
+
 
 }
 
