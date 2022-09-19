@@ -51,4 +51,8 @@
     })
     console.log(emailArray);
 
+    let totalYears = users.reduce((total,person) => {
+        return total + person.yearsOfExperience
+    }, 0);
+    console.log(totalYears);
 })();
