@@ -44,4 +44,11 @@
         if(n.languages.length > 2) console.log(n.languages);
     })
 
+    let emailArray = [];
+    let stringArray2 = users.filter(function (email){
+        emailArray.push(email.email);
+
+    })
+    console.log(emailArray);
+
 })();
