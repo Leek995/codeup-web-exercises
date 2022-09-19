@@ -55,4 +55,7 @@
         return total + person.yearsOfExperience
     }, 0);
     console.log(totalYears);
+
+
+
 })();
