@@ -129,7 +129,11 @@ function createSuperPet(pets){
 createSuperPet(pets);
 console.log(SUPER_PET);
 
-
-
-
+function pugs_only(pets){
+    let pug_array = [];
+    pets.filter(pet =>{
+        if(pet.breed.toLowerCase() === 'pug'){return pug_array.push(pet.name.length);}})
+    console.log(pug_array)
+}
+pugs_only(pets);
 
