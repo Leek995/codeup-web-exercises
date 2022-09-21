@@ -110,7 +110,7 @@ console.log(average_age_collection);
 const SUPER_PET = {};
 function createSuperPet(pets){
     let super_pet_name  = pets.reduce((single_name, pet) =>{
-        return single_name + pet.name;
+        return `${single_name}${pet.name}-`;
 
     }, '');
     SUPER_PET.name = super_pet_name;
@@ -147,3 +147,11 @@ function getFemaleFamilyMembers(family){
     console.log(females);
 }
 getFemaleFamilyMembers(family);
+
+function makeLongPetString(pets){
+    let concatenation_station = []
+    pets.reduce(function (pet_string, pet ){
+    }, "")
+}
+makeLongPetString(pets);
+

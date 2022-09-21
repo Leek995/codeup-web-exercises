@@ -1,12 +1,33 @@
-(function (){
-    "use strict"
-    function gitHubUsername (username){
-        const fetch_git = fetch(`https://api.github.com/users/${username}/event`, {headers: {'Authorization': `token ${GITHUB_TOKEN}`}})
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-            })
-        return fetch_git;
+// (function (){
+//     "use strict"
+//     function gitHubUsername (username){
+//         fetch(`https://api.github.com/users/${username}/events`, {headers: {'Authorization': `token ${GITHUB_TOKEN}`}})
+//             .then(response => response.json())
+//             .then(data => {
+//                 console.log(data);
+//                 let last_push = data.filter(data => {
+//                     if(data.type.toLowerCase() === 'pushevent' ){
+//
+//                     }
+//                 })
+//                 console.log(`${username} last commit was on ${data['created_at']} it went a little like this ${data[0]['payload']['commits'][0]['message']}`)
+//             })
+//     }
+
+    // gitHubUsername("Leek995");
+    function wait(number){
+        return new Promise((resolve, reject) => {
+            if(number){
+                setTimeout(() => {
+
+                    }, number)
+
+            }else {
+
+            }
+        })
     }
-    gitHubUsername(Leek995);
-})();
+    wait(1000).then(() => console.log('You\'ll see this after 1 second'));
+    wait(3000).then(() => console.log('You\'ll see this after 3 seconds'));
+
+
