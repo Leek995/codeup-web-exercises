@@ -137,3 +137,13 @@ function pugs_only(pets){
 }
 pugs_only(pets);
 
+function getFemaleFamilyMembers(family){
+    let females = [];
+    family.filter(person =>{
+       if (person.gender.toLowerCase() === 'female'){
+          females.push(person.name)}
+       return females;
+    })
+    console.log(females);
+}
+getFemaleFamilyMembers(family);
