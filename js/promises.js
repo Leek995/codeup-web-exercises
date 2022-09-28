@@ -17,16 +17,17 @@
     // gitHubUsername("Leek995");
     function wait(number){
         return new Promise((resolve, reject) => {
-            if(number){
-                setTimeout(() => {
-
-                    }, number)
-
-            }else {
-
-            }
+            setTimeout(()=>{
+                if(number){
+                    resolve("You'll see this after " + number + "second(s)")
+                }else {
+                    reject("Didn't not give a number ")
+                }
+            }, number)
         })
     }
+
+    wait(2000).then(() => console.log('testing'));
     wait(1000).then(() => console.log('You\'ll see this after 1 second'));
     wait(3000).then(() => console.log('You\'ll see this after 3 seconds'));
 
