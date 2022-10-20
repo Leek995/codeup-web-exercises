@@ -119,7 +119,11 @@
             let fiveDayForeCastHTML = renderHTML(weatherData);
             $('.weather-stats').html(fiveDayForeCastHTML);
             marker.on('dragend', $('.right-now').html(rightNowHTML));
-            $('#btn').on('click', onDragEnd);
+            $('#btn').on('click', event=>{
+                onDragEnd();
+
+
+            });
         }).fail(function (error){
             console.log(error);
         })
@@ -132,6 +136,9 @@
                     map.setZoom(7);
                 });
             });
+        fetch('https://api.mapbox.com/geocoding/v5/{endpoint}/{search_text}.json')
+            .then(response => response)
+            .then(data => console.log(data))
     }
     // marker drag event that triggers capture of lat-long
     marker.on('dragend', onDragEnd);
